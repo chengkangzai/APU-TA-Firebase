@@ -1,61 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
+        <!--Cloud Firestore -->
+        <!--https://firebase.google.com/docs/web/setup#available-libraries-->
+        <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-app.js"></script>
-    <!--Cloud Firestore -->
-    <!--https://firebase.google.com/docs/web/setup#available-libraries-->
-    <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
+        <title>TA - Lab PC information</title>
+    </head>
 
-    <title>TA - Lab PC information </title>
-</head>
+    <body class="bg-primary text-white">
+        <header class="text-center ">
+            <h1>APU Technical Assistant - Lab PC information</h1>
+        </header>
+        <div class="bg-white text-dark">
+            <table id="pc-list" class="table table-dark table-hover">
+                <thead>
+                    <th>PC Name</th>
+                    <th>CPU</th>
+                    <th>Model</th>
+                    <th>GPU</th>
+                    <th>RAM</th>
+                </thead>
+            </table>
+        </div>
 
-<body class="bg-primary text-white">
-    <header class="text-center ">
-        <h1>APU Technical Assistant - Lab PC information</h1>
-    </header>
-    <div class="bg-white text-dark">
+        <script
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"
+        ></script>
+        ]
 
-        <table id="pc-list" class="table table-dark table-hover">
-            <thead>
-                <th>PC Name</th>
-                <th>CPU </th>
-                <th>Model</th>
-            </thead>
-        </table>
-    </div>
+        <!-- #region Firestore js CDN -->
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+                apiKey: 'AIzaSyDckUugsdOP1qZQH8c5Ep7aK4F0hFiN6Kk',
+                authDomain: 'apu-ta.firebaseapp.com',
+                databaseURL: 'https://apu-ta.firebaseio.com',
+                projectId: 'apu-ta',
+                storageBucket: 'apu-ta.appspot.com',
+                messagingSenderId: '368332746085',
+                appId: '1:368332746085:web:5d1842e98433e54d'
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            //Select the database
+            const db = firebase.firestore();
+        </script>
+        <script src="app.js"></script>
+        <!-- #endregion -->
+        <!-- #region Bootstrap js CDN -->
+        <!--Bootstrap js CDN -->
 
-    <!-- #region Firestore js CDN -->
-    <script>
-        // Your web app's Firebase configuration
-        var firebaseConfig = {
-            apiKey: "AIzaSyDckUugsdOP1qZQH8c5Ep7aK4F0hFiN6Kk",
-            authDomain: "apu-ta.firebaseapp.com",
-            databaseURL: "https://apu-ta.firebaseio.com",
-            projectId: "apu-ta",
-            storageBucket: "apu-ta.appspot.com",
-            messagingSenderId: "368332746085",
-            appId: "1:368332746085:web:5d1842e98433e54d"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        //Select the database 
-        const db = firebase.firestore();
-    </script>
-    <script src="app.js"></script>
-    <!-- #endregion -->
-    <!-- #region Bootstrap js CDN -->
-    <!--Bootstrap js CDN -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- #endregion -->
-</body>
-
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"
+        ></script>
+        <!-- #endregion -->
+    </body>
 </html>
