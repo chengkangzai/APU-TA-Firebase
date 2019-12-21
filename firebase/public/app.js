@@ -1,4 +1,4 @@
-const pclist = $('#pc-list');
+const lablist = $('#pc-list');
 
 function concatObj(obj, arrayKey) {
     var temp = [];
@@ -13,24 +13,22 @@ function renderPC(doc) {
     console.log(data);
 
     var dom = `
-        <tr data=id=${doc.id}>
+        <tr data-id=${doc.id }>
             <td>${doc.id}</td>
             <td>${data.CPU}</td>
             <td>${data.Model}</td>
-            <td>${concatObj(data.GPUs, 'Description')}</td>
+            <td>${concatObj(data.GPUs, 'Name')}</td>
             <td>${concatObj(data.RAMs, 'Capacity')}</td>
         </tr>
     `;
 
-    pclist.append(dom);
+    lablist.append(dom);
 }
+//https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 
-db.collection('labs')
-    .doc('TL04-01')
-    .collection('computers')
-    .get()
-    .then(snapshot => {
-        snapshot.docs.forEach(doc => {
-            renderPC(doc);
-        });
+
+db.collection('labs').get().then(snapshot => {
+    snapshot.docs.forEach(doc => {
+        renderPC(doc);
     });
+});
