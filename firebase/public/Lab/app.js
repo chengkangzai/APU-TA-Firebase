@@ -19,6 +19,8 @@ function renderPC(doc) {
             <td>${data.Model}</td>
             <td>${concatObj(data.GPUs, 'Name')}</td>
             <td>${concatObj(data.RAMs, 'Capacity')}</td>
+            <td>${concatObj(data.Storage, 'Size')}</td>
+
         </tr>
     `;
 
