@@ -1,5 +1,11 @@
 const pclist = $('#pc-list');
 
+//https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
+var url_string = window.location.href; // window.location.href
+var url = new URL(url_string);
+var lab = url.searchParams.get("lab");
+
+
 function concatObj(obj, arrayKey) {
     var temp = [];
 
@@ -26,10 +32,6 @@ function renderPC(doc) {
 
     pclist.append(dom);
 }
-//https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
-var url_string = window.location.href; // window.location.href
-var url = new URL(url_string);
-var lab = url.searchParams.get("lab");
 
 
 
