@@ -21,7 +21,7 @@ function login() {
     var password = document.getElementById("password").value;
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(function(response) {
-            alert("You ae authorized to enter the dark age");
+            alert("You are authorized to enter the dark age");
             window.location.href = "Lab/index.html";
         })
         .catch(function(error) {
