@@ -1,34 +1,31 @@
-const lablist = $('#pc-list');
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        window.location.href = "Lab/index.html";
+    } else {
 
-function concatObj(obj, arrayKey) {
-    var temp = [];
-
-    Object.entries(obj).forEach(([key, val]) => temp.push(val[arrayKey]));
-
-    return temp.join(', ');
-}
-
-function renderPC(doc) {
-    const data = doc.data();
-    console.log(data);
-
-    var dom = `
-        <tr data-id=${doc.id }>
-            <td>${doc.id}</td>
-            <td>${data.CPU}</td>
-            <td>${data.Model}</td>
-            <td>${concatObj(data.GPUs, 'Name')}</td>
-            <td>${concatObj(data.RAMs, 'Capacity')}</td>
-        </tr>
-    `;
-
-    lablist.append(dom);
-}
-//https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
-
-
-db.collection('labs').get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        renderPC(doc);
-    });
+    }
 });
+
+//Incase ppl want to login by enter
+
+function checkIfIsEnter(event) {
+    var x = event.keyCode;
+    submit = document.getElementById("submit");
+    if (x == 13) { // 13 is the Enter(Return) key
+        submit.click();
+    }
+}
+
+function login() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function(response) {
+            alert("You ae authorized to enter the dark age");
+            window.location.href = "Lab/index.html";
+        })
+        .catch(function(error) {
+            alert("There is some error !" + error);
+            window.location.href = "register.html";
+        });
+}
