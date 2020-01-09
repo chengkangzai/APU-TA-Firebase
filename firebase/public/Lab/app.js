@@ -3,41 +3,106 @@ const pclist = $('#pc-list');
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 var url_string = window.location.href; // window.location.href
 var url = new URL(url_string);
-var lab = url.searchParams.get("lab");
+var lab = url.searchParams.get('lab');
 
-function concatObj(obj, arrayKey) {
+function formatBytes(bytes, decimals = 2) {
+    if (!isNumeric(bytes)) return 'n/a';
+
+    if (bytes === 0) return '0 Bytes';
+
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+function isNumeric(num) {
+    return !isNaN(num);
+}
+
+function mergeObjectValue(primeObj, childKey, callback) {
+    if (!primeObj) return ['n/a'];
+
     var temp = [];
-    Object.entries(obj).forEach(([key, val]) => temp.push(val[arrayKey]));
-    return temp.join(', ');
+
+    Object.entries(primeObj).forEach(([key, childObject]) => {
+        let value = childObject[childKey];
+
+        // Convert string to number
+        if (isNumeric(value)) {
+            value = +value;
+        }
+
+        // Apply the callback function (eg: Format bytes to gigabytes)
+        if (callback) {
+            value = callback(value);
+        }
+
+        temp.push(value);
+    });
+
+    return temp;
 }
 
 function renderPC(doc) {
     const data = doc.data();
-    console.log(data);
+
+    const gpus = mergeObjectValue(data.GPUs, 'Name')
+        .sort()
+        .join(', ');
+
+    const ramTotal = formatBytes(
+        mergeObjectValue(data.RAMs, 'Capacity').reduce((acc, v) => acc + v)
+    );
+
+    const rams = mergeObjectValue(data.RAMs, 'Capacity', formatBytes).join(
+        ', '
+    );
+
+    const storages = mergeObjectValue(data.Storage, 'Size', formatBytes).join(
+        ', '
+    );
+
+    const lastUpdate = data.Updated_Time
+        ? data.Updated_Time.toDate()
+        : new Date(doc['_document'].proto.updateTime);
+
     var dom = `
-        <tr data-id=${doc.id }>
+        <tr data-id=${doc.id}>
             <td>${doc.id}</td>
             <td>${data.CPU}</td>
             <td>${data.Model}</td>
-            <td>${concatObj(data.GPUs, 'Name')}</td>
-            <td>${concatObj(data.RAMs, 'Capacity')}</td>
-            <td>${concatObj(data.Storage, 'Size')}</td>
+            <td>${gpus}</td>
+            <td>${ramTotal} <small>(${rams})</small></td>
+            <td>${storages}</td>
+            <td>${lastUpdate.toLocaleDateString('en-GB')}</td>
         </tr>
     `;
     pclist.append(dom);
 }
 
-db.collection('labs').doc(lab).collection('computers').get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-        renderPC(doc);
-    });
-});
-if (lab == "APLC-L2") {
-    db.collection('labs').doc('APLC-L3').collection('computers').get().then(snapshot => {
+db.collection('labs')
+    .doc(lab)
+    .collection('computers')
+    .get()
+    .then(snapshot => {
         snapshot.docs.forEach(doc => {
             renderPC(doc);
         });
     });
+if (lab == 'APLC-L2') {
+    db.collection('labs')
+        .doc('APLC-L3')
+        .collection('computers')
+        .get()
+        .then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                renderPC(doc);
+            });
+        });
 }
 
 function goback() {
