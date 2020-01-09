@@ -52,7 +52,7 @@ function renderPC(doc) {
 
     const gpus = mergeObjectValue(data.GPUs, 'Name')
         .sort()
-        .join(', ');
+        .join('<br/>');
 
     const ramTotal = formatBytes(
         mergeObjectValue(data.RAMs, 'Capacity').reduce((acc, v) => acc + v)
@@ -63,7 +63,7 @@ function renderPC(doc) {
     );
 
     const storages = mergeObjectValue(data.Storage, 'Size', formatBytes).join(
-        ', '
+        '<br/>'
     );
 
     const lastUpdate = data.Updated_Time
