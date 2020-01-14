@@ -23,7 +23,7 @@ function isNumeric(num) {
     return !isNaN(num);
 }
 
-function mergeObjectValue(primeObj, childKey, callback) {
+function mergeObjectValue(primeObj, childKey, formatterFn) {
     if (!primeObj) return ['n/a'];
 
     var temp = [];
@@ -36,9 +36,9 @@ function mergeObjectValue(primeObj, childKey, callback) {
             value = +value;
         }
 
-        // Apply the callback function (eg: Format bytes to gigabytes)
-        if (callback) {
-            value = callback(value);
+        // Apply the formatter function (eg: Format bytes to gigabytes)
+        if (formatterFn) {
+            value = formatterFn(value);
         }
 
         temp.push(value);
@@ -49,6 +49,7 @@ function mergeObjectValue(primeObj, childKey, callback) {
 
 function renderPC(doc) {
     const data = doc.data();
+    console.log(doc.id, data);
 
     const gpus = mergeObjectValue(data.GPUs, 'Name')
         .sort()
