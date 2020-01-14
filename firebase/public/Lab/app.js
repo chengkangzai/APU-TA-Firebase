@@ -1,4 +1,5 @@
 const pclist = $('#pc-list');
+const tbody=$('#tbody')
 
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 var url_string = window.location.href; // window.location.href
@@ -81,7 +82,7 @@ function renderPC(doc) {
             <td>${lastUpdate.toLocaleDateString('en-GB')}</td>
         </tr>
     `;
-    pclist.append(dom);
+    tbody.append(dom);
 }
 
 db.collection('labs')
@@ -92,6 +93,9 @@ db.collection('labs')
         snapshot.docs.forEach(doc => {
             renderPC(doc);
         });
+    })
+    .then(function () {
+        $('#pc-list').DataTable();
     });
 if (lab == 'APLC-L2') {
     db.collection('labs')
@@ -102,7 +106,7 @@ if (lab == 'APLC-L2') {
             snapshot.docs.forEach(doc => {
                 renderPC(doc);
             });
-        });
+        });       
 }
 
 function goback() {
