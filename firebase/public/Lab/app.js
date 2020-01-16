@@ -1,10 +1,13 @@
 const pclist = $('#pc-list');
 const tbody = $('#tbody')
+const backbtn = $("#openBackbtn");
 
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
 var url_string = window.location.href; // window.location.href
 var url = new URL(url_string);
 var lab = url.searchParams.get('lab');
+
+backbtn.hide();
 
 function formatBytes(bytes, decimals = 2) {
     if (!isNumeric(bytes)) return 'n/a';
@@ -88,6 +91,25 @@ function renderPC(doc) {
 
 function goback() {
     window.history.go(-1);
+}
+
+function hideSidePanel() {
+    sidePanel = $("#sidePanel");
+    content=$("#infoDiv");
+
+    sidePanel.hide();
+    content.removeClass("col-lg-11").addClass("col-lg-12");
+    
+    backbtn.show();
+}
+function showSidePanel(){
+    sidePanel = $("#sidePanel");
+    content=$("#infoDiv");
+
+    sidePanel.show();
+    content.removeClass("col-lg-12").addClass("col-lg-11");
+    
+    backbtn.hide();
 }
 
 if (lab === null) {

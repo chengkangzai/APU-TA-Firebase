@@ -25,14 +25,18 @@
     <div class="container-fluid">
         <header class="text-center">
             <h1>APU Technical Assistant - Lab PC information</h1>
+            <a id="openBackbtn" class="btn btn-primary text-white" role="button" onclick="showSidePanel()">Toggle side panel</a>
         </header>
         <div class="row">
-            <div class="col-lg-1">
+            <div class="col-lg-1" id="sidePanel">
                 <button class="btn btn-primary" onclick="goback()">
                     Go Back
                 </button>
+                <button class="btn btn-primary mt-1" onclick="hideSidePanel()">
+                    Hide
+                </button>
             </div>
-            <div class="col-lg-11 ">
+            <div class="col-lg-11 " id="infoDiv">
                 <table id="pc-list" class="p-0 m-0 table table-striped table-bordered">
                     <thead>
                         <th scope="col">PC Name</th>
@@ -44,7 +48,6 @@
                         <th scope="col">Last Update</th>
                     </thead>
                     <tbody id="tbody">
-
                     </tbody>
                 </table>
             </div>
