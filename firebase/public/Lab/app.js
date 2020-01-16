@@ -86,9 +86,14 @@ function renderPC(doc) {
     tbody.append(dom);
 }
 
+function goback() {
+    window.history.go(-1);
+}
+
 if (lab === null) {
     goback();
 } else {
+    //https://firebase.google.com/docs/firestore/query-data/get-data
     db.collection('labs')
         .doc(lab)
         .collection('computers')
@@ -99,6 +104,7 @@ if (lab === null) {
             });
         })
         .then(function () {
+            //https://www.datatables.net/
             $('#pc-list').DataTable();
         });
     if (lab == 'APLC-L2') {
@@ -114,6 +120,4 @@ if (lab === null) {
     }
 }
 
-function goback() {
-    window.history.go(-1);
-}
+
