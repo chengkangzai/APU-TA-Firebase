@@ -3,7 +3,7 @@ var totalLevel = ["Level 3", "Level 4", "Level 5", "Level 6", "APIIT"];
 var level3 = ["TL03-DL", "TL03-PLC", "TL03-CADCAM", "TL03-ROBO"];
 var level4 = ["TL04-01", "TL04-02", "TL04-03", "TL04-04", "TL04-05", "TL04-14"];
 var level5 = ["TL05-SOC", "TL05-CNA", "Forensic Lab"];
-var level6 = ["TL06-01", "TL06-02", "TL06-3", "TL06-04", "TL06-06", "TL06-07", "TL06-08", "TL06-09", , "TL06-11"];
+var level6 = ["TL06-01", "TL06-02", "TL06-03", "TL06-04", "TL06-06", "TL06-07", "TL06-08", "TL06-09", , "TL06-11"];
 var APIIT = ["APLC","AS","CGI","ID","VFX","APLC Classroom"];
 var imgurl = "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 var id = "level-";

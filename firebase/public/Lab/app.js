@@ -121,6 +121,7 @@ if (lab === null) {
         .collection('computers')
         .get()
         .then(snapshot => {
+            //process data
             snapshot.docs.forEach(doc => {
                 renderPC(doc);
             });
