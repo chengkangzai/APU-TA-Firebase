@@ -8,7 +8,7 @@ var APIIT = ["APLC", "AS", "CGI", "ID", "VFX", "APLC Classroom"];
 var imgurl = "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
 var id = "level-";
 
-function renderSelectiondom(element) {
+function renderSelectionDom(element) {
 
     if (element === "APLC Classroom") {
         var dom = `
@@ -48,31 +48,31 @@ function renderSelectiondom(element) {
 function renderSelection() {
     level3.forEach(element => {
         var belong = $("#" + id + "3" + "row");
-        var dom = renderSelectiondom(element);
+        var dom = renderSelectionDom(element);
         belong.append(dom);
     });
 
     level4.forEach(element => {
         var belong = $("#" + id + "4" + "row");
-        var dom = renderSelectiondom(element);
+        var dom = renderSelectionDom(element);
         belong.append(dom);
     });
 
     level5.forEach(element => {
         var belong = $("#" + id + "5" + "row");
-        var dom = renderSelectiondom(element);
+        var dom = renderSelectionDom(element);
         belong.append(dom);
     });
 
     level6.forEach(element => {
         var belong = $("#" + id + "6" + "row");
-        var dom = renderSelectiondom(element);
+        var dom = renderSelectionDom(element);
         belong.append(dom);
     });
 
     APIIT.forEach(element => {
         var belong = $("#APIITrow");
-        var dom = renderSelectiondom(element);
+        var dom = renderSelectionDom(element);
         belong.append(dom);
     });
 
