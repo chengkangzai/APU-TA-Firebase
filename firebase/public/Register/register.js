@@ -1,22 +1,17 @@
 function registerUserAccount() {
-    var email = document.getElementById("email").value;
-    var password = document.getElementById("password").value;
-
+    var email = $("#email").val();
+    var password = $("#password").val();
     firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(function(response) {
-            alert("Your account has been created" + response);
+            alert("Your account has been created");
             window.location.href = "../Lab/index.html";
         })
         .catch(function(error) {
-            alert("There is some error" + error);
+            alert(error);
         });
 }
 
 
 function checkIfIsEnter(event) {
-    var x = event.keyCode;
-    submit = document.getElementById("submit");
-    if (x == 13) { // 13 is the Enter(Return) key
-        submit.click();
-    }
+    if (event.keyCode == 13) registerUserAccount();
 }
