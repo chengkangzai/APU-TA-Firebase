@@ -18,7 +18,7 @@ var uiConfig = {
     'credentialHelper': firebaseui.auth.CredentialHelper.NONE,
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: '/firebase/public/Lab/index.html',
+    signInSuccessUrl: 'Lab/index.html',
     signInOptions: [{
         provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
         signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
