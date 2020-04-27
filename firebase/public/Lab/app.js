@@ -1,13 +1,11 @@
-const pclist = $('#pc-list');
+const pcList = $('#pc-list');
 const tbody = $('#tbody')
-const backbtn = $("#openBackbtn");
+const backBtn = $("#openBackBtn");
 
 //https://stackoverflow.com/questions/979975/how-to-get-the-value-from-the-get-parameters
-var url_string = window.location.href; // window.location.href
-var url = new URL(url_string);
-var lab = url.searchParams.get('lab');
+var lab = new URL(window.location.href).searchParams.get('lab');
 
-backbtn.hide();
+backBtn.hide();
 
 function formatBytes(bytes, decimals = 2) {
     if (!isNumeric(bytes)) return 'n/a';
@@ -34,17 +32,10 @@ function mergeObjectValue(primeObj, childKey, formatterFn) {
 
     Object.entries(primeObj).forEach(([key, childObject]) => {
         let value = childObject[childKey];
-
         // Convert string to number
-        if (isNumeric(value)) {
-            value = +value;
-        }
-
+        if (isNumeric(value)) value = +value;
         // Apply the formatter function (eg: Format bytes to gigabytes)
-        if (formatterFn) {
-            value = formatterFn(value);
-        }
-
+        if (formatterFn) value = formatterFn(value);
         temp.push(value);
     });
 
@@ -53,27 +44,26 @@ function mergeObjectValue(primeObj, childKey, formatterFn) {
 
 function renderPC(doc) {
     const data = doc.data();
-    console.log(doc.id, data);
+    //console.log(doc.id, data);
 
     const gpus = mergeObjectValue(data.GPUs, 'Name')
         .sort()
         .join('<br/>');
 
     const ramTotal = formatBytes(
-        mergeObjectValue(data.RAMs, 'Capacity').reduce((acc, v) => acc + v)
+        mergeObjectValue(data.RAMs, 'Capacity')
+        .reduce((acc, v) => acc + v)
     );
 
-    const rams = mergeObjectValue(data.RAMs, 'Capacity', formatBytes).join(
-        ', '
-    );
+    const rams = mergeObjectValue(data.RAMs, 'Capacity', formatBytes)
+        .join(', ');
 
-    const storages = mergeObjectValue(data.Storage, 'Size', formatBytes).join(
-        '<br/>'
-    );
+    const storages = mergeObjectValue(data.Storage, 'Size', formatBytes)
+        .join('<br/>');
 
-    const lastUpdate = data.Updated_Time
-        ? data.Updated_Time.toDate()
-        : new Date(doc['_document'].proto.updateTime);
+    const lastUpdate = data.Updated_Time ?
+        data.Updated_Time.toDate() :
+        new Date(doc['_document'].proto.updateTime);
 
     var dom = `
         <tr data-id=${doc.id}>
@@ -89,58 +79,46 @@ function renderPC(doc) {
     tbody.append(dom);
 }
 
-function goback() {
-    window.history.go(-1);
+function goBack() {
+    window.location.href = "index.html";
 }
 
 function hideSidePanel() {
-    sidePanel = $("#sidePanel");
-    content=$("#infoDiv");
-
-    sidePanel.hide();
-    content.removeClass("col-lg-11").addClass("col-lg-12");
-    
-    backbtn.show();
-}
-function showSidePanel(){
-    sidePanel = $("#sidePanel");
-    content=$("#infoDiv");
-
-    sidePanel.show();
-    content.removeClass("col-lg-12").addClass("col-lg-11");
-    
-    backbtn.hide();
+    $("#sidePanel").hide();
+    $("#infoDiv").removeClass("col-lg-11").addClass("col-lg-12");
+    backBtn.show();
 }
 
-if (lab === null) {
-    goback();
-} else {
+function showSidePanel() {
+    $("#sidePanel").show();
+    $("#infoDiv").removeClass("col-lg-12").addClass("col-lg-11");
+    backBtn.hide();
+}
+
+(lab === null) ? goBack():
     //https://firebase.google.com/docs/firestore/query-data/get-data
     db.collection('labs')
-        .doc(lab)
+    .doc(lab)
+    .collection('computers')
+    .get()
+    .then(snapshot => {
+        snapshot.docs.forEach(doc => {
+            renderPC(doc);
+        });
+    })
+    .then(function() {
+        //https://www.datatables.net/
+        $('#pc-list').DataTable();
+    });
+
+if (lab == 'APLC-L2') {
+    db.collection('labs')
+        .doc('APLC-L3')
         .collection('computers')
         .get()
         .then(snapshot => {
-            //process data
             snapshot.docs.forEach(doc => {
                 renderPC(doc);
             });
-        })
-        .then(function () {
-            //https://www.datatables.net/
-            $('#pc-list').DataTable();
         });
-    if (lab == 'APLC-L2') {
-        db.collection('labs')
-            .doc('APLC-L3')
-            .collection('computers')
-            .get()
-            .then(snapshot => {
-                snapshot.docs.forEach(doc => {
-                    renderPC(doc);
-                });
-            });
-    }
 }
-
-
