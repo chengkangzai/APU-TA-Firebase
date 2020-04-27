@@ -1,6 +1,5 @@
 .map-clean {
     color: #313437;
-    background-color: #fff;
 }
 
 .map-clean p {
@@ -25,16 +24,12 @@
 .map-clean .intro {
     font-size: 16px;
     max-width: 500px;
+    color: #eff1f4;
     margin: 0 auto 40px;
-}
-
-.map-clean iframe {
-    background-color: #eee;
 }
 
 .newsletter-subscribe {
     color: #313437;
-    background-color: #fff;
     padding: 50px 0;
 }
 
@@ -60,6 +55,7 @@
 }
 
 .newsletter-subscribe .intro p {
+    font-size: larger;
     margin-bottom: 35px;
 }
 

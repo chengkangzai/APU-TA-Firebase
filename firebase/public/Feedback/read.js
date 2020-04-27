@@ -1,11 +1,3 @@
-function concatObj(obj, arrayKey) {
-    var temp = [];
-
-    Object.entries(obj).forEach(([key, val]) => temp.push(val[arrayKey]));
-
-    return temp.join(', ');
-}
-
 function renderFeedback(doc) {
     const data = doc.data();
 
@@ -38,8 +30,6 @@ function deleteEntry(docId) {
     });
 }
 
-
-
 db.collection('feedback').get().then(snapshot => {
     snapshot.docs.forEach(doc => {
         renderFeedback(doc);
@@ -47,6 +37,9 @@ db.collection('feedback').get().then(snapshot => {
     });
 }).catch(function(error) {
     if (error.code == "permission-denied") {
-        window.location.href = "../404.html";
+        window.location.href = "404.html";
     }
 });
+
+particleJS()
+makeFloatOnParticle("tableContainer");

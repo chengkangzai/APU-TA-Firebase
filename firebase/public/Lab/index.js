@@ -95,15 +95,15 @@ function renderLevel() {
         selectionList.append(dom);
     });
 }
-//TODO 1. render level
-//TODO 2. render selection
+
 
 firebase.auth().onAuthStateChanged(function(user) {
     if (!user) window.location.href = "../index.html";
-
 });
 
 
 makeImgUrl();
 renderLevel();
 renderSelection();
+particleJS();
+makeFloatOnParticle("content-wrapper");

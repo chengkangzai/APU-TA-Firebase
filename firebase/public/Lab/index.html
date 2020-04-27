@@ -14,31 +14,34 @@
     <script src="https://www.gstatic.com/firebasejs/7.4.0/firebase-firestore.js"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link rel="stylesheet" href="../asset/css/particlejs.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 
 <body>
-    <h2>Select The Lab that you want to check !</h2>
-    <div class="col-lg-12 ">
-        <a href="#" onclick="openlevel3()" class="btn " id="openLevel3">Level 3</a>
-        <a href="#" onclick="openlevel4()" class="btn " id="openLevel4">Level 4</a>
-        <a href="#" onclick="openlevel5()" class="btn " id="openLevel5">Level 5</a>
-        <a href="#" onclick="openlevel6()" class="btn " id="openLevel6">Level 6</a>
-        <a href="#" onclick="open_apiit()" class="btn " id="open_Apiit">APIIT</a>
-        <a href="../Feedback/index.html" class="btn ">Feedback</a>
-        <a href="#" onclick="logout()" class="btn ">Logout</a>
-    </div>
+    <div id="content-wrapper">
+        <h2 class="text-white">Select The Lab that you want to check !</h2>
+        <div class="col-lg-12 ">
+            <a href="#" onclick="openlevel3()" class="btn " id="openLevel3">Level 3</a>
+            <a href="#" onclick="openlevel4()" class="btn " id="openLevel4">Level 4</a>
+            <a href="#" onclick="openlevel5()" class="btn " id="openLevel5">Level 5</a>
+            <a href="#" onclick="openlevel6()" class="btn " id="openLevel6">Level 6</a>
+            <a href="#" onclick="open_apiit()" class="btn " id="open_Apiit">APIIT</a>
+            <a href="../Feedback/index.html" class="btn ">Feedback</a>
+            <a href="#" onclick="logout()" class="btn ">Logout</a>
+        </div>
 
-    <div class="bg-white text-dark" id="selection">
-        
-        <div id="welcome">
-            <ol class="mt-3">
-                <li>Hi Human! You must be curious enough to reach here. Hence instruction shall be written</li>
-                <li>Select the place that you want to visit</li>
-                <li>The Read Quota is limited, hence dont spam it</li>
-            </ol>
+        <div class="text-white" id="selection">
+
+            <div id="welcome">
+                <ol class="mt-3">
+                    <li>Hi Human! You must be curious enough to reach here. Hence instruction shall be written</li>
+                    <li>Select the place that you want to visit</li>
+                    <li>The Read Quota is limited, hence dont spam it</li>
+                </ol>
+            </div>
         </div>
     </div>
 
@@ -49,7 +52,7 @@
     <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
 
 
-    <!-- #region Firestore js CDN -->
+
     <script>
         // Your web app's Firebase configuration
         var firebaseConfig = {
@@ -66,15 +69,14 @@
         // Select the database
         const db = firebase.firestore();
     </script>
-    <script src="index.js"></script>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="collapse.js"></script>
-    <script src="../logout.js"></script>
-    <!-- #endregion -->
-    <!-- #region Bootstrap js CDN -->
-    <!--Bootstrap js CDN -->
+    <script src="../asset/js/particle.js"></script>
+    <script src="../asset/js/logout.js"></script>
+    <script src="index.js"></script>
+
     <script crossorigin="anonymous" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script crossorigin="anonymous" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <!-- #endregion -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
 </body>

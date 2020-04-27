@@ -122,3 +122,5 @@ if (lab == 'APLC-L2') {
             });
         });
 }
+particleJS();
+makeFloatOnParticle("content-wrapper");

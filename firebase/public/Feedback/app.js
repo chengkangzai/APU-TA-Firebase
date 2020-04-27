@@ -30,3 +30,5 @@ db.collection("feedback")
             `<a class="btn btn-primary mt-3" href="read.html" role="button">View Feedback </a>`
         );
     })
+particleJS();
+makeFloatOnParticle("content-wrapper");
