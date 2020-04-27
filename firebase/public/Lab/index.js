@@ -5,44 +5,37 @@ var level4 = ["TL04-01", "TL04-02", "TL04-03", "TL04-04", "TL04-05", "TL04-14"];
 var level5 = ["TL05-SOC", "TL05-CNA", "Forensic Lab"];
 var level6 = ["TL06-01", "TL06-02", "TL06-03", "TL06-04", "TL06-06", "TL06-07", "TL06-08", "TL06-09", , "TL06-11"];
 var APIIT = ["APLC", "AS", "CGI", "ID", "VFX", "APLC Classroom"];
-var imgurl = "https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500";
+var imgUrl = [];
 var id = "level-";
 
-function renderSelectionDom(element) {
 
-    if (element === "APLC Classroom") {
-        var dom = `
-        <div class="col-12 col-sm-11 col-md-11 col-lg-3 col-xl-3 ">
-            <div class="card">
-                <div class="card-image">
-                    <a href="lab.html?lab=APLC-L2" title="Click here to go ${element}">
-                        <img src="${imgurl}" />
-                    </a>
-                    <span class="card-title">${element}</span>
-                </div>
-                <div class="card-action">
-                    <a href="lab.html?lab=APLC-L2" title="Click here to go ${element}">Go!</a>
-                </div>
-            </div>
-        </div>`;
-        return dom;
-    } else {
-        var dom = `
+function makeImgUrl() {
+    for (let index = 1; index <= 8; index++) {
+        var temp = "../asset/img/" + index + ".jpg";
+        imgUrl.push(temp);
+    }
+}
+
+function renderSelectionDom(element) {
+    var dom = `        
     <div class="col-12 col-sm-11 col-md-11 col-lg-3 col-xl-3 ">
         <div class="card">
-            <div class="card-image">
-                <a href="lab.html?lab=APLC-L2" title="Click here to go ${element}">
-                    <img src="${imgurl}" />
-                </a>
-                <span class="card-title">${element}</span>
-            </div>
-            <div class="card-action">
-                <a href="lab.html?lab=${element}" title="Click here to go ${element}">Go!</a>
-            </div>
-        </div>
-    </div>`;
-        return dom;
-    }
+    <div class="card-image">`;
+
+    (element === "APLC Classroom") ?
+    dom += `<a href="lab.html?lab=APLC-L2" title="Click here to go ${element}">`:
+        dom += `<a href="lab.html?lab=${element}" title="Click here to go ${element}">`;
+
+    dom += `
+    <img src="${imgUrl[Math.floor(Math.random() * 8)]}" /></a>
+        <span class="card-title">${element}</span>
+    </div>
+    <div class="card-action">
+        <a href="lab.html?lab=APLC-L2" class="text-dark " title="Click here to go ${element}"><strong>Go!</strong></a>
+    </div>
+    </div>
+    </div>`
+    return dom;
 }
 
 function renderSelection() {
@@ -81,7 +74,7 @@ function renderSelection() {
 function renderLevel() {
     var i = 2;
     totalLevel.forEach(element => {
-        i = i + 1;
+        i++;
         if (element == "APIIT") {
             var dom = `
             <div id="${element}">
@@ -105,14 +98,12 @@ function renderLevel() {
 //TODO 1. render level
 //TODO 2. render selection
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (!user) {
-        alert("Please log in to continue");
-        window.location.href = "../index.html";
-    }
+firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) window.location.href = "../index.html";
+
 });
 
 
-renderLevel()
-renderSelection()
-
+makeImgUrl();
+renderLevel();
+renderSelection();
