@@ -31,7 +31,7 @@ function renderSelectionDom(element) {
         <span class="card-title">${element}</span>
     </div>
     <div class="card-action">
-        <a href="lab.html?lab=APLC-L2" class="text-dark " title="Click here to go ${element}"><strong>Go!</strong></a>
+        <a href="lab.html?lab=${element}" class="text-dark " title="Click here to go ${element}"><strong>Go!</strong></a>
     </div>
     </div>
     </div>`
