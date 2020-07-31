@@ -10,32 +10,27 @@ var id = "level-";
 
 
 function makeImgUrl() {
-    for (let index = 1; index <= 8; index++) {
-        var temp = "../asset/img/" + index + ".jpg";
-        imgUrl.push(temp);
+    for (let i = 1; i <= 8; i++) {
+        imgUrl.push(`../asset/img/${i}.jpg`);
     }
 }
 
 function renderSelectionDom(element) {
-    var dom = `        
-    <div class="col-12 col-sm-11 col-md-11 col-lg-3 col-xl-3 ">
-        <div class="card">
-    <div class="card-image">`;
-
-    (element === "APLC Classroom") ?
-    dom += `<a href="lab.html?lab=APLC-L2" title="Click here to go ${element}">`:
-        dom += `<a href="lab.html?lab=${element}" title="Click here to go ${element}">`;
-
-    dom += `
-    <img src="${imgUrl[Math.floor(Math.random() * 8)]}" /></a>
-        <span class="card-title">${element}</span>
-    </div>
-    <div class="card-action">
-        <a href="lab.html?lab=${element}" class="text-dark " title="Click here to go ${element}"><strong>Go!</strong></a>
-    </div>
-    </div>
-    </div>`
-    return dom;
+    var btnDom = `<a href="lab.html?lab=${element}" class="btn btn-primary" title="Click here to go ${element}">`;
+    if (element === "APLC Classroom") {
+        var btnDom = `<a href="lab.html?lab=APLC-L2" class="btn btn-primary" title="Click here to go ${element}">`;
+    }
+    var temp = `
+    <div class="col-12 col-sm-11 col-md-11 col-lg-3 col-xl-3 mb-1 m-0 ">
+        <div class="card m-0">
+            <img class="card-img-top" src="${imgUrl[Math.floor(Math.random() * 8)]}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-dark">${element}</h5>
+                <a href="lab.html?lab=${element}" class="btn btn-primary">Go </a>
+            </div>
+        </div>
+    </div>`;
+    return temp;
 }
 
 function renderSelection() {
@@ -78,16 +73,16 @@ function renderLevel() {
         if (element == "APIIT") {
             var dom = `
             <div id="${element}">
-                <h3>${element}</h3>
-                <div class="row" id="${element + "row"}">
+                <h3 class="p-3">${element}</h3>
+                <div class="row m-0" id="${element + "row"}">
                 </div>
             </div>
             `;
         } else {
             var dom = `
         <div id="${id + i}">
-            <h3>${element}</h3>
-            <div class="row" id="${id + i + "row"}">
+            <h3 class="p-3">${element}</h3>
+            <div class="row m-0" id="${id + i + "row"}">
             </div>
         </div>
         `;
@@ -96,14 +91,10 @@ function renderLevel() {
     });
 }
 
-
 firebase.auth().onAuthStateChanged(function(user) {
     if (!user) window.location.href = "../index.html";
 });
 
-
 makeImgUrl();
 renderLevel();
 renderSelection();
-particleJS();
-makeFloatOnParticle("content-wrapper");
