@@ -122,3 +122,5 @@ function makeFloatOnParticle(id) {
         left: 0
     });
 }
+particleJS();
+makeFloatOnParticle("content-wrapper");

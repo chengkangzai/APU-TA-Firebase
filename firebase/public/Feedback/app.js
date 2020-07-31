@@ -28,6 +28,3 @@ firebase.auth().onAuthStateChanged(function(user) {
         );
     }
 });
-
-particleJS();
-makeFloatOnParticle("content-wrapper");

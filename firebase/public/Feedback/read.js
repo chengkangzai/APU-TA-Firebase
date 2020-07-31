@@ -41,5 +41,4 @@ db.collection('feedback').get().then(snapshot => {
     }
 });
 
-particleJS()
 makeFloatOnParticle("tableContainer");

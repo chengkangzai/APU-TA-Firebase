@@ -96,7 +96,6 @@ function showSidePanel() {
 }
 
 (lab === null) ? goBack():
-    //https://firebase.google.com/docs/firestore/query-data/get-data
     db.collection('labs')
     .doc(lab)
     .collection('computers')
@@ -107,7 +106,6 @@ function showSidePanel() {
         });
     })
     .then(function() {
-        //https://www.datatables.net/
         $('#pc-list').DataTable();
     });
 
@@ -122,5 +120,3 @@ if (lab == 'APLC-L2') {
             });
         });
 }
-particleJS();
-makeFloatOnParticle("content-wrapper");
