@@ -21,14 +21,13 @@ function submitFeedback() {
 function checkIfIsEnter(event) {
     if (event.keyCode == 13) submitFeedback()
 }
-
-db.collection("feedback")
-    .get()
-    .then(function(snap) {
-
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user.email == "pycck@hotmail.com" || user.email == "kangkangge.ge@gmail.com") {
         $(".form-group").append(
             `<a class="btn btn-primary mt-3" href="read.html" role="button">View Feedback </a>`
         );
-    })
+    }
+});
+
 particleJS();
 makeFloatOnParticle("content-wrapper");
